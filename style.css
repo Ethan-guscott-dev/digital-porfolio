@@ -25,5 +25,67 @@ html {
 
 body {
     background: var(--bg-color);
-    color: ;
+    color: var(--text--color);
 }
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    padding: 2rem 9%;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo{
+    font-size: 2.5rem;
+    color: var(--text-bg-color);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+
+}
+
+.navbar a{
+    font-size: 1.7rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-left: 2rem;
+    transition: 0.3s;
+}
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+}
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--text-bg-color);
+    cursor: pointer;
+    display: none;
+    @media screen and (max-width: 768px) {
+        display: block;
+    }
+
+}
+
+section {
+    min-height: 200vh;
+    padding: 10rem 9% 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+
