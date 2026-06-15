@@ -12,7 +12,7 @@
 :root {
     --bg-color: #081b29; 
     --second-bg-color: #112e42; 
-    --text-bg-color: #ededed; /* This is the light color for your text */
+    --text-bg-color: #ededed; 
     --main-color: #00abf0;
 }
 
@@ -23,7 +23,7 @@ html {
 
 body {
     background: var(--bg-color);
-    color: var(--text-bg-color); /* Fixed typo here */
+    color: var(--text-bg-color);
 }
 
 .header {
@@ -49,7 +49,7 @@ body {
 
 .navbar a {
     font-size: 1.7rem;
-    color: var(--text-bg-color); /* Fixed typo here */
+    color: var(--text-bg-color); 
     font-weight: 500;
     margin-left: 2rem;
     transition: 0.3s;
@@ -67,7 +67,6 @@ body {
     display: none;
 }
 
-/* Moved the media query out of the selector */
 @media screen and (max-width: 768px) {
     #menu-icon {
         display: block;
@@ -75,30 +74,64 @@ body {
 }
 
 section {
-    min-height: 100vh; /* Changed from 200vh so you don't have excessive empty scrolling */
+    min-height: 100vh; 
     padding: 10rem 9% 2rem;
     position: relative;
     z-index: 1;
 }
 
-.home {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+section:nth-of-type(even) {
+    background: var(--second-bg-color);
 }
 
-/* Added styling for your text links so they actually look like buttons */
+/* Updated home section to align items to the left */
+.home {
+    display: flex;
+    align-items: center;       /* Vertically centers the content wrapper block */
+    justify-content: flex-start; /* Aligns the wrapper content to the left side */
+    text-align: left;          /* Left-aligns the text inside the wrapper */
+}
+
+/* Styled your heading hierarchy so it's clean and spaced out nicely */
+.home-content h1 {
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.home-content h2 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--main-color);
+}
+
+.home-content h3 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.home-content p {
+    font-size: 1.6rem;
+    margin: 2rem 0 4rem;
+    max-width: 600px; /* Prevents text from stretching too far across the screen */
+}
+
+/* Button Container styling to keep buttons inline */
+.btn-box {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
 .btn {
     display: inline-block;
-    padding: 1rem 2.8rem;
+    padding: 1.2rem 2.8rem;
     background: var(--main-color);
     border-radius: 4rem;
     color: var(--bg-color);
     font-size: 1.6rem;
     font-weight: 600;
-    margin: 1rem;
     transition: 0.5s ease;
 }
 
@@ -107,20 +140,87 @@ section {
     color: var(--bg-color);
 }
 
-section {
-    min-height:  100vh;
-    padding: 10rem 9% 2rem;
+.home-content {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-section:nth-of-type(even) {
-    background: var(--second-bg-color);
+.home-content h1 {
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.3;
 }
 
-.home {
+.home-content .text-animate {
+    position: relative;
+}
+
+.home-content .text-animate::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--main-color);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.home-content .text-animate:hover::after {
+    transform: translateX(0);
+}
+
+.home-content .text-animate h3 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    color: transparent;
+    text-shadow: 0 0 5px var(--main-color);
+    -webkit-text-stroke: .7px var(--main-color);
+}
+
+.home-content p {
+    font-size: 1.6rem;
+    margin: 2rem 0 4rem;
+    max-width: 600px; /* Prevents text from stretching too far across the screen */
+}
+
+.btn-box {
+    position: relative;
     display: flex;
-    align-items: center;
-    padding: 0 9%;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+}
+
+.btn-box .btn {
+    position: relative;
+    display: inline-block;
+    padding: 1.2rem 2.8rem;
+    background: var(--main-color);
+    border-radius: 4rem;
+    color: var(--bg-color);
+    font-size: 1.6rem;
+    font-weight: 600;
+    transition: 0.5s ease;
+}
+
+.btn-box .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: var(--text-bg-color);
+    border-radius: 4rem;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: -1;
+}
+
+.btn-box .btn:hover::before {
+    transform: translate(-50%, -50%) scale(1);
 }
