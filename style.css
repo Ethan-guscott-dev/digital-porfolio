@@ -1,3 +1,4 @@
+/* --- GLOBAL RESET & BASE STYLES --- */
 * {
     margin: 0;
     padding: 0;
@@ -28,6 +29,7 @@ body {
     color: var(--text-bg-color);
 }
 
+/* --- NAVIGATION BAR --- */
 .header {
     position: fixed;
     top: 0;
@@ -49,7 +51,6 @@ body {
     letter-spacing: 0.1rem;
 }
 
-/* Navbar Buttons Styling */
 .navbar a {
     font-size: 1.6rem;
     color: var(--text-bg-color); 
@@ -61,7 +62,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Navbar Button Hover & Active States */
 .navbar a:hover,
 .navbar a.active {
     color: var(--bg-color);
@@ -82,6 +82,7 @@ body {
     }
 }
 
+/* --- GENERIC SECTION STYLING --- */
 section {
     min-height: 100vh; 
     padding: 10rem 9% 2rem;
@@ -93,74 +94,56 @@ section:nth-of-type(even) {
     background: var(--second-bg-color);
 }
 
-/* Home Section Layout */
+/* --- HOME (HERO) SECTION --- */
 .home {
     display: flex;
     align-items: center;       
-    justify-content: flex-start; 
-    text-align: left;          
+    justify-content: space-between; /* Maximum separation */
+    padding: 0 9%; /* Matches the header padding perfectly */
+    width: 100%;
+    min-height: 100vh;
 }
 
 .home-content {
-    max-width: 60rem;
-    padding: 2rem;
+    flex: 1;
+    max-width: 75rem; /* Allows text to spread out slightly more */
+    text-align: left;
 }
 
 .home-content h1 {
-    font-size: 5.6rem;
+    font-size: 6.8rem;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.2;
+    margin-bottom: 1rem;
 }
 
 .home-content h2 {
-    font-size: 3.2rem;
+    font-size: 4rem;
     font-weight: 700;
     color: var(--main-color);
+    margin-bottom: 0.5rem;
 }
 
-.home-content .text-animate {
-    position: relative;
-}
-
-.home-content .text-animate::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 100%;
-    background: var(--main-color);
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
-}
-
-.home-content .text-animate:hover::after {
-    transform: translateX(0);
-}
-
-.home-content .text-animate h3 {
-    font-size: 3.2rem;
+.home-content h3 {
+    font-size: 3rem;
     font-weight: 600;
-    margin-top: 1rem;
-    color: transparent;
-    text-shadow: 0 0 5px var(--main-color);
-    -webkit-text-stroke: .7px var(--main-color);
+    color: var(--text-bg-color);
 }
 
 .home-content p {
-    font-size: 1.6rem;
-    margin: 2rem 0 4rem;
-    max-width: 600px; 
+    font-size: 1.8rem;
+    margin: 2.5rem 0 4rem;
+    max-width: 60rem; 
+    line-height: 1.6;
 }
 
-/* Button Container styling */
+/* --- BUTTONS --- */
 .btn-box {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
 }
 
-/* Unified Button Styling */
 .btn {
     position: relative;
     display: inline-flex;
@@ -207,11 +190,27 @@ section:nth-of-type(even) {
     width: 100%; 
 }
 
-/* Background gradient animation keyframes */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* --- PROFILE IMAGE HOLDER --- */
+.home-img {
+    position: relative;
+    width: 420px; /* Slightly upscaled to balance out the wide page */
+    height: 420px; 
+    flex-shrink: 0; 
+    border-radius: 5rem;
+    border: 0.3rem solid var(--main-color);
+    box-shadow: 0 0 25px var(--main-color);
+    overflow: hidden;
+    background: rgba(0, 171, 240, 0.05); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 4rem; /* Direct gap safety buffer */
+}
+
+.home-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
 }
 
 /* --- ANIMATED BACKGROUND SQUARES --- */
@@ -250,6 +249,13 @@ section:nth-of-type(even) {
 .background-squares li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
 .background-squares li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
 
+/* --- ANIMATIONS --- */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 @keyframes floatUp {
     0% {
         transform: translateY(0) rotate(0deg);
@@ -260,5 +266,34 @@ section:nth-of-type(even) {
         transform: translateY(-1000px) rotate(720deg);
         opacity: 0;
         border-radius: 50%; 
+    }
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 992px) {
+    .home {
+        flex-direction: column-reverse; 
+        justify-content: center;
+        text-align: center;
+        padding-top: 15rem;
+        gap: 6rem;
+    }
+    
+    .home-content {
+        max-width: 100%;
+    }
+    
+    .home-content p {
+        margin: 2.5rem auto 4rem;
+    }
+
+    .btn-box {
+        justify-content: center;
+    }
+
+    .home-img {
+        width: 280px;
+        height: 280px;
+        margin-left: 0;
     }
 }
