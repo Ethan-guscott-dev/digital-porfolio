@@ -335,3 +335,84 @@ section:nth-of-type(even) {
         mask-image: none;
     }
 }
+
+/* ==========================================================================
+   ONLY EDITS THE ABOUT ME SECTION BELOW
+   ========================================================================== */
+
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--second-bg-color);
+    padding: 12rem 9% 10rem;
+}
+
+.about-container {
+    width: 100%;
+    max-width: 90rem;
+    text-align: center;
+}
+
+.heading {
+    font-size: 5rem;
+    margin-bottom: 4rem;
+    font-weight: 700;
+}
+
+.heading span {
+    color: var(--main-color);
+}
+
+.about-content-box {
+    background: rgba(8, 27, 41, 0.6); /* Transparent dark tint container box */
+    border: 0.2rem solid var(--main-color);
+    border-radius: 3rem;
+    padding: 4rem 5rem;
+    box-shadow: 0 0 20px rgba(0, 171, 240, 0.1);
+}
+
+.about-content-box p {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    color: var(--text-bg-color);
+    margin-bottom: 2.5rem;
+    text-align: justify; /* Aligns text neatly like a paragraph block */
+}
+
+.about-content-box p:last-of-type {
+    margin-bottom: 4rem;
+}
+
+/* About Section Icon Row Styling */
+.about-highlights {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.highlight-item {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-color);
+    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    border: 0.1rem solid rgba(0, 171, 240, 0.3);
+}
+
+.highlight-item i {
+    font-size: 2.2rem;
+}
+
+/* Tablet and Mobile Optimization for About box padding */
+@media screen and (max-width: 992px) {
+    .about-content-box {
+        padding: 3rem 2rem;
+    }
+}
+
