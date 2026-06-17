@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Education History</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body data-page="education">
+
+    <header class="header">
+        <a href="index.html" class="logo">Ethan</a>
+        <nav class="navbar">
+            <a href="index.html" class="active"><i class='bx bx-arrow-back'></i> Back to Portfolio</a>
+        </nav>
+    </header>
+
+    <section class="about">
+        <div class="about-container">
+            <h2 class="heading">My <span>Education History</span></h2>
+            
+            <div class="education-timeline">
+                
+                <div class="about-content-box education-card">
+                    <div class="education-header">
+                        <div class="edu-logo-wrapper">
+                            <img src="YOUR_FIRST_SCHOOL_LOGO.png" alt="Saracens Sixth Form Logo" class="edu-school-logo">
+                        </div>
+                        <div class="edu-details">
+                            <h3>Saracens Sixth Form</h3>
+                            <span class="edu-date"><i class='bx bx-calendar'></i> 2025- Present</span>
+                        </div>
+                    </div>
+                    <p class="edu-desc">
+                        Currently completing the <strong>Digital T Level</strong> qualification. Focusing heavily on foundational computing concepts, data environments, emerging technologies like AI, and hands-on software design frameworks.
+                    </p>
+                    <div class="project-tech-tags">
+                        <span>Digital T Level</span>
+                        <span>Computer Science</span>
+                        <span>Systems Analytics</span>
+                    </div>
+                </div>
+
+                <div class="about-content-box education-card">
+                    <div class="education-header">
+                        <div class="edu-logo-wrapper">
+                            <img src="YOUR_SECOND_SCHOOL_LOGO.png" alt="Secondary School Logo" class="edu-school-logo">
+                        </div>
+                        <div class="edu-details">
+                            <h3>Instituto Español Vicente Cañada Blanch</h3>
+                            <span class="edu-date"><i class='bx bx-calendar'></i> 2021 - 2025</span>
+                        </div>
+                    </div>
+                    <p class="edu-desc">
+                        Completed secondary education and achieved strong GCSE grades. Developed a core interest in computational logic, mathematics, and science engineering parameters.
+                    </p>
+                    <div class="project-tech-tags">
+                        <span>International GCSEs</span>
+                        <span>Mathematics</span>
+                        <span>Information Technology</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="background-animation" class="background-animation"></div>
+
+    <script>
+        const container = document.getElementById('background-animation');
+        const shapeTypes = ['square', 'circle', 'triangle', 'diamond'];
+        const maxShapes = 15;
+
+        function createShape(isInitial = false) {
+            if (container.children.length >= maxShapes) return;
+
+            const li = document.createElement('div');
+            
+            const rareRoll = Math.random();
+            if (rareRoll <= 0.01) {
+                li.classList.add('shape', 'rare-star');
+            } else {
+                const randomShape = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+                li.classList.add('shape', randomShape);
+            }
+
+            const size = Math.floor(Math.random() * 100) + 20; 
+            const leftPosition = Math.random() * 100; 
+            const duration = Math.random() * 20 + 10; 
+            const delay = isInitial ? Math.random() * -20 : 0; 
+
+            li.style.width = `${size}px`;
+            li.style.height = `${size}px`;
+            li.style.left = `${leftPosition}%`;
+            li.style.animationDuration = `${duration}s`;
+            li.style.animationDelay = `${delay}s`;
+
+            li.addEventListener('animationend', () => {
+                li.remove();
+                createShape(false);
+            });
+
+            container.appendChild(li);
+        }
+
+        for (let i = 0; i < maxShapes; i++) {
+            createShape(true);
+        }
+    </script>
+</body>
+</html>
