@@ -249,7 +249,7 @@ section:nth-of-type(even) {
     opacity: 0.95;
 }
 
-/* --- ANIMATED BACKGROUND SQUARES --- */
+/* --- ANIMATED BACKGROUND SQUARES (EVERYWHERE) --- */
 .background-squares {
     position: fixed;
     top: 0;
@@ -299,7 +299,7 @@ section:nth-of-type(even) {
         border-radius: 4px;
     }
     100% {
-        transform: translateY(-1000px) rotate(720deg);
+        transform: translateY(-1200px) rotate(720deg);
         opacity: 0;
         border-radius: 50%; 
     }
@@ -336,10 +336,7 @@ section:nth-of-type(even) {
     }
 }
 
-/* ==========================================================================
-   ONLY EDITS THE ABOUT ME SECTION BELOW
-   ========================================================================== */
-
+/* --- ABOUT ME SECTION --- */
 .about {
     display: flex;
     justify-content: center;
@@ -350,7 +347,7 @@ section:nth-of-type(even) {
 
 .about-container {
     width: 100%;
-    max-width: 90rem;
+    max-width: 120rem; /* Wide boundary allows proper alignment */
     text-align: center;
 }
 
@@ -365,7 +362,7 @@ section:nth-of-type(even) {
 }
 
 .about-content-box {
-    background: rgba(8, 27, 41, 0.6); /* Transparent dark tint container box */
+    background: rgba(8, 27, 41, 0.6); 
     border: 0.2rem solid var(--main-color);
     border-radius: 3rem;
     padding: 4rem 5rem;
@@ -377,7 +374,7 @@ section:nth-of-type(even) {
     line-height: 1.8;
     color: var(--text-bg-color);
     margin-bottom: 2.5rem;
-    text-align: justify; /* Aligns text neatly like a paragraph block */
+    text-align: justify; 
 }
 
 .about-content-box p:last-of-type {
@@ -403,16 +400,96 @@ section:nth-of-type(even) {
     padding: 1rem 2rem;
     border-radius: 1.5rem;
     border: 0.1rem solid rgba(0, 171, 240, 0.3);
+    transition: all 0.3s ease;
 }
 
 .highlight-item i {
     font-size: 2.2rem;
 }
 
-/* Tablet and Mobile Optimization for About box padding */
+/* Glowing/Shining Effect for "T Level Digital Student" Button */
+.clickable-highlight:hover {
+    color: var(--bg-color) !important;
+    background: var(--main-color) !important;
+    box-shadow: 0 0 25px var(--main-color), 0 0 50px var(--main-color);
+    transform: translateY(-3px);
+}
+
+/* --- SIDE-BY-SIDE GRID SYSTEMS (FOR BOTH PROJECTS & EDUCATION) --- */
+.projects-grid, 
+.education-timeline {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Exactly 2 equal columns next to each other */
+    gap: 3rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.project-card, 
+.education-card {
+    text-align: left;
+    height: 100%;
+}
+
+.project-card h3 {
+    font-size: 2.4rem;
+    color: var(--text-bg-color);
+    margin: 1.5rem 0 1rem;
+}
+
+.project-icon i {
+    font-size: 4rem;
+    color: var(--main-color);
+}
+
+.project-tech-tags {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.project-tech-tags span {
+    background: var(--bg-color);
+    color: var(--main-color);
+    padding: 0.5rem 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    border-radius: 1rem;
+    border: 0.1rem solid rgba(0, 171, 240, 0.2);
+}
+
+/* --- EDUCATION DETAIL SPECIFICS --- */
+.education-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.edu-details h3 {
+    font-size: 2.2rem;
+    color: var(--text-bg-color);
+}
+
+.edu-date {
+    font-size: 1.4rem;
+    color: var(--main-color);
+}
+
+.edu-desc {
+    margin-bottom: 2rem !important;
+}
+
+/* Mobile viewport adjustments */
 @media screen and (max-width: 992px) {
     .about-content-box {
         padding: 3rem 2rem;
     }
+    
+    .projects-grid, 
+    .education-timeline {
+        grid-template-columns: 1fr; /* Stacks vertically on phone sizes */
+        gap: 2rem;
+    }
 }
-
