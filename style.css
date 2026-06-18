@@ -27,6 +27,7 @@ body {
     background-size: 400% 400%;
     animation: gradientMove 15s ease infinite;
     color: var(--text-bg-color);
+    min-height: 100vh;
 }
 
 /* --- NAVIGATION BAR --- */
@@ -85,12 +86,11 @@ body {
 /* --- GENERIC SECTION STYLING --- */
 section {
     min-height: 100vh; 
-    padding: 10rem 9% 2rem;
+    padding: 14rem 9% 2rem;
     position: relative;
     z-index: 1;
 }
 
-/* Changed from a solid background to a translucent tint so squares show through */
 section:nth-of-type(even) {
     background: rgba(17, 46, 66, 0.4);
     backdrop-filter: blur(4px);
@@ -139,60 +139,81 @@ section:nth-of-type(even) {
     line-height: 1.6;
 }
 
-/* --- BUTTONS --- */
+/* --- BASE BUTTON STRUCTURE --- */
 .btn-box {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
 }
 
-.btn {
+/* --- BUTTON 1: "View My Work" (Sliding Fill Transition) --- */
+.home-content .btn {
     position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     padding: 1.2rem 2.8rem;
-    background: var(--main-color);
+    background: transparent;
     border: .2rem solid var(--main-color);
     border-radius: 4rem;
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: .1rem;
-    color: var(--bg-color);
+    color: var(--main-color);
     z-index: 1;
     overflow: hidden;
-    transition: color 0.4s ease, border-color 0.4s ease;
+    transition: color 0.4s ease;
 }
 
-.btn-box .btn:nth-child(1),
-.btn-box .btn:nth-child(2) {
-    background: transparent;
-    color: var(--main-color);
-}
-
-.btn::before {
+.home-content .btn::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    width: 0; 
+    left: -100%;
+    width: 100%; 
     height: 100%;
     background: var(--main-color); 
     z-index: -1;
-    transition: width 0.4s ease;
+    transition: left 0.4s cubic-bezier(0.3, 1, 0.5, 1);
 }
 
-.btn:hover {
-    color: #000000 !important; 
-    border-color: var(--main-color); 
-    z-index: 1; 
+.home-content .btn:hover {
+    color: var(--bg-color) !important;
+    box-shadow: 0 0 15px var(--main-color);
 }
 
-.btn:hover::before {
-    width: 100%; 
+.home-content .btn:hover::before {
+    left: 0;
 }
 
-/* --- SOCIAL MEDIA ICON LINKS --- */
+/* --- BUTTON 2: Project Repository Buttons (3D Press Down / Scale effect) --- */
+.project-card .btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2.4rem;
+    background: var(--bg-color);
+    border: .2rem solid var(--main-color);
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-bg-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.project-card .btn:hover {
+    background: var(--main-color);
+    color: var(--bg-color);
+    box-shadow: 0 5px 0px #0077a8, 0 8px 15px rgba(0, 171, 240, 0.4);
+    transform: translateY(-3px);
+}
+
+.project-card .btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0px #0077a8, 0 2px 4px rgba(0, 171, 240, 0.4);
+}
+
+/* --- SOCIAL MEDIA ICON LINKS (Expanding Pulse Ring) --- */
 .home-sci {
     display: flex;
     gap: 2rem;
@@ -212,14 +233,32 @@ section:nth-of-type(even) {
     font-size: 2rem;
     color: var(--main-color);
     z-index: 1;
-    overflow: hidden;
-    transition: .5s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.home-sci a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: .2rem solid var(--main-color);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: -1;
 }
 
 .home-sci a:hover {
     color: var(--bg-color);
-    background: var(--main-color);
-    box-shadow: 0 0 15px var(--main-color);
+    background-color: var(--main-color);
+    box-shadow: 0 0 10px var(--main-color);
+}
+
+.home-sci a:hover::after {
+    transform: scale(1.4);
+    opacity: 1;
 }
 
 /* --- PROFILE IMAGE HOLDER --- */
@@ -251,7 +290,7 @@ section:nth-of-type(even) {
     opacity: 0.95;
 }
 
-/* --- ANIMATED BACKGROUND SQUARES (EVERYWHERE) --- */
+/* --- ANIMATED BACKGROUND SQUARES --- */
 .background-squares {
     position: fixed;
     top: 0;
@@ -307,43 +346,11 @@ section:nth-of-type(even) {
     }
 }
 
-/* --- RESPONSIVE MEDIA QUERIES --- */
-@media screen and (max-width: 992px) {
-    .home {
-        flex-direction: column-reverse; 
-        justify-content: center;
-        text-align: center;
-        padding-top: 15rem;
-        gap: 6rem;
-    }
-    
-    .home-content {
-        max-width: 100%;
-    }
-    
-    .home-content p {
-        margin: 2.5rem auto 4rem;
-    }
-
-    .btn-box, .home-sci {
-        justify-content: center;
-    }
-
-    .home-img {
-        width: 320px;
-        height: 320px;
-        margin-left: 0;
-        -webkit-mask-image: none; 
-        mask-image: none;
-    }
-}
-
 /* --- ABOUT ME SECTION --- */
 .about {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Changed from solid var(--second-bg-color) to a transparent blend */
     background: rgba(17, 46, 66, 0.4);
     backdrop-filter: blur(4px);
     padding: 12rem 9% 10rem;
@@ -385,7 +392,6 @@ section:nth-of-type(even) {
     margin-bottom: 4rem;
 }
 
-/* About Section Icon Row Styling */
 .about-highlights {
     display: flex;
     justify-content: space-around;
@@ -411,12 +417,169 @@ section:nth-of-type(even) {
     font-size: 2.2rem;
 }
 
-/* Glowing/Shining Effect for "T Level Digital Student" Button */
+/* --- BUTTON 3: "T Level Digital Student" (Neon Glow Split Slide) --- */
+.clickable-highlight {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.clickable-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: var(--main-color);
+    transition: height 0.3s ease;
+    z-index: -1;
+}
+
 .clickable-highlight:hover {
     color: var(--bg-color) !important;
-    background: var(--main-color) !important;
-    box-shadow: 0 0 25px var(--main-color), 0 0 50px var(--main-color);
+    box-shadow: 0 0 20px var(--main-color), 0 0 40px var(--main-color);
     transform: translateY(-3px);
+}
+
+.clickable-highlight:hover::before {
+    height: 100%;
+}
+
+/* --- STANDALONE SKILLS SECTION STYLES --- */
+.skills-section, .contact-section {
+    min-height: 100vh;
+    padding: 14rem 9% 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.skills-container, .contact-container {
+    width: 100%;
+    max-width: 120rem;
+    text-align: center;
+}
+
+.skills-grid, .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    width: 100%;
+    margin-top: 4rem;
+}
+
+.contact-grid {
+    grid-template-columns: 1fr;
+    max-width: 70rem;
+    margin: 4rem auto 0;
+}
+
+.skills-card, .contact-card {
+    background: rgba(8, 27, 41, 0.75); 
+    border: 0.2rem solid var(--main-color);
+    border-radius: 3rem;
+    padding: 4rem 5rem;
+    box-shadow: 0 0 20px rgba(0, 171, 240, 0.1);
+    text-align: left;
+}
+
+.skills-card h3, .contact-card h3 {
+    font-size: 2.6rem;
+    color: var(--text-bg-color);
+    margin-bottom: 3rem;
+    font-weight: 600;
+}
+
+.contact-desc {
+    font-size: 1.7rem;
+    line-height: 1.7;
+    color: var(--text-bg-color);
+    margin-bottom: 3.5rem;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.contact-item i {
+    font-size: 3.5rem;
+    color: var(--main-color);
+}
+
+.contact-item h4 {
+    font-size: 1.6rem;
+    color: rgba(237, 237, 237, 0.6);
+}
+
+.contact-item a, .contact-item p {
+    font-size: 1.8rem;
+    color: var(--text-bg-color);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.contact-item a:hover {
+    color: var(--main-color);
+}
+
+.skills-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
+}
+
+.progress-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.skill-info i {
+    color: var(--main-color);
+    font-size: 2.2rem;
+    vertical-align: middle;
+    margin-right: 0.6rem;
+}
+
+.skill-info .percentage {
+    color: var(--text-bg-color);
+    font-weight: 500;
+}
+
+.bar-container {
+    width: 100%;
+    height: 1.4rem;
+    background: transparent;
+    border-radius: 1rem;
+    border: 0.2rem solid var(--main-color);
+    overflow: hidden;
+    padding: 0.15rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--main-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 12px var(--main-color);
 }
 
 /* --- SIDE-BY-SIDE GRID SYSTEMS (FOR BOTH PROJECTS & EDUCATION) --- */
@@ -485,15 +648,223 @@ section:nth-of-type(even) {
     margin-bottom: 2rem !important;
 }
 
-/* Mobile viewport adjustments */
-@media screen and (max-width: 992px) {
-    .about-content-box {
+/* --- CONTACT FORM FIELD STYLING --- */
+.contact-section {
+    min-height: 100vh;
+    padding: 14rem 9% 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 120rem;
+    text-align: center;
+}
+
+.contact-grid {
+    display: block;
+    max-width: 65rem;
+    margin: 4rem auto 0;
+}
+
+.contact-card {
+    background: rgba(8, 27, 41, 0.85); 
+    border: 0.2rem solid var(--main-color);
+    border-radius: 3rem;
+    padding: 4rem 4.5rem;
+    box-shadow: 0 0 25px rgba(0, 171, 240, 0.15);
+    text-align: left;
+}
+
+/* Explicitly targeted title to stop generic h3 overrides */
+.contact-card h3.contact-title {
+    font-size: 2.8rem;
+    color: var(--text-bg-color);
+    margin-bottom: 3rem;
+    font-weight: 600;
+    border-bottom: 0.2rem solid rgba(0, 171, 240, 0.2);
+    padding-bottom: 1rem;
+}
+
+.actual-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group label {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--main-color);
+    letter-spacing: 0.05rem;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 1.5rem;
+    background: var(--bg-color);
+    border: 0.2rem solid rgba(0, 171, 240, 0.3);
+    border-radius: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--text-bg-color);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 15px rgba(0, 171, 240, 0.4);
+    background: rgba(17, 46, 66, 0.2);
+}
+
+/* --- FORM BUTTON STYLING & HOVER --- */
+.form-submit-btn {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border: 0.2rem solid var(--main-color);
+    color: var(--main-color);
+    padding: 1.4rem;
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+
+.form-submit-btn:hover {
+    background: var(--main-color) !important;
+    color: var(--bg-color) !important;
+    box-shadow: 0 0 20px var(--main-color);
+    transform: scale(1.02);
+}
+
+.form-submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- FOOTER INFO AND STATUS MESSAGES --- */
+.contact-footer-info {
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 0.1rem solid rgba(237, 237, 237, 0.1);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.contact-item i {
+    font-size: 3rem;
+    color: var(--main-color);
+}
+
+.contact-item h4 {
+    font-size: 1.4rem;
+    color: rgba(237, 237, 237, 0.5);
+    font-weight: 400;
+}
+
+.contact-item p {
+    font-size: 1.7rem;
+    color: var(--text-bg-color);
+    font-weight: 500;
+}
+
+.form-status-msg {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    text-align: center;
+    min-height: 2.2rem;
+}
+
+.form-status-msg.success {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.form-status-msg.error {
+    color: #ff3333;
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.2);
+}
+
+@media screen and (max-width: 576px) {
+    .contact-card {
         padding: 3rem 2rem;
+    }
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 992px) {
+    .home {
+        flex-direction: column-reverse; 
+        justify-content: center;
+        text-align: center;
+        padding-top: 15rem;
+        gap: 6rem;
+    }
+    
+    .home-content {
+        max-width: 100%;
+    }
+    
+    .home-content p {
+        margin: 2.5rem auto 4rem;
+    }
+
+    .btn-box, .home-sci {
+        justify-content: center;
+    }
+
+    .home-img {
+        width: 320px;
+        height: 320px;
+        margin-left: 0;
+        -webkit-mask-image: none; 
+        mask-image: none;
+    }
+
+    .about-content-box, .skills-card, .contact-card {
+        padding: 3rem 2.5rem;
     }
     
     .projects-grid, 
-    .education-timeline {
+    .education-timeline,
+    .skills-grid {
         grid-template-columns: 1fr; 
-        gap: 2rem;
+        gap: 2.5rem;
     }
+}
+/* --- JAVASCRIPT FORM SUBMISSION STATUS STYLES --- */
+.form-status-msg {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.form-status-msg.success {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.form-status-msg.error {
+    color: #ff3333;
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
 }
