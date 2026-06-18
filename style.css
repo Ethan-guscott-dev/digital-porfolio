@@ -90,8 +90,10 @@ section {
     z-index: 1;
 }
 
+/* Changed from a solid background to a translucent tint so squares show through */
 section:nth-of-type(even) {
-    background: var(--second-bg-color);
+    background: rgba(17, 46, 66, 0.4);
+    backdrop-filter: blur(4px);
 }
 
 /* --- HOME (HERO) SECTION --- */
@@ -341,13 +343,15 @@ section:nth-of-type(even) {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--second-bg-color);
+    /* Changed from solid var(--second-bg-color) to a transparent blend */
+    background: rgba(17, 46, 66, 0.4);
+    backdrop-filter: blur(4px);
     padding: 12rem 9% 10rem;
 }
 
 .about-container {
     width: 100%;
-    max-width: 120rem; /* Wide boundary allows proper alignment */
+    max-width: 120rem; 
     text-align: center;
 }
 
@@ -362,7 +366,7 @@ section:nth-of-type(even) {
 }
 
 .about-content-box {
-    background: rgba(8, 27, 41, 0.6); 
+    background: rgba(8, 27, 41, 0.75); 
     border: 0.2rem solid var(--main-color);
     border-radius: 3rem;
     padding: 4rem 5rem;
@@ -419,7 +423,7 @@ section:nth-of-type(even) {
 .projects-grid, 
 .education-timeline {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Exactly 2 equal columns next to each other */
+    grid-template-columns: repeat(2, 1fr); 
     gap: 3rem;
     width: 100%;
     margin-top: 2rem;
@@ -489,7 +493,7 @@ section:nth-of-type(even) {
     
     .projects-grid, 
     .education-timeline {
-        grid-template-columns: 1fr; /* Stacks vertically on phone sizes */
+        grid-template-columns: 1fr; 
         gap: 2rem;
     }
 }
