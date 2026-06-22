@@ -446,8 +446,8 @@ section:nth-of-type(even) {
     height: 100%;
 }
 
-/* --- STANDALONE SKILLS SECTION STYLES --- */
-.skills-section, .contact-section {
+/* --- NEW SKILLS PAGE CARDS LAYOUT --- */
+.skills-page-section {
     min-height: 100vh;
     padding: 14rem 9% 10rem;
     display: flex;
@@ -457,131 +457,116 @@ section:nth-of-type(even) {
     z-index: 1;
 }
 
-.skills-container, .contact-container {
+.skills-page-container {
     width: 100%;
     max-width: 120rem;
     text-align: center;
 }
 
-.skills-grid, .contact-grid {
+.skills-card-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    width: 100%;
-    margin-top: 4rem;
-}
-
-.contact-grid {
-    grid-template-columns: 1fr;
-    max-width: 70rem;
-    margin: 4rem auto 0;
-}
-
-.skills-card, .contact-card {
-    background: rgba(8, 27, 41, 0.75); 
-    border: 0.2rem solid var(--main-color);
-    border-radius: 3rem;
-    padding: 4rem 5rem;
-    box-shadow: 0 0 20px rgba(0, 171, 240, 0.1);
-    text-align: left;
-}
-
-.skills-card h3, .contact-card h3 {
-    font-size: 2.6rem;
-    color: var(--text-bg-color);
-    margin-bottom: 3rem;
-    font-weight: 600;
-}
-
-.contact-desc {
-    font-size: 1.7rem;
-    line-height: 1.7;
-    color: var(--text-bg-color);
-    margin-bottom: 3.5rem;
-}
-
-.contact-links {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem;
+    margin-top: 5rem;
 }
 
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.contact-item i {
-    font-size: 3.5rem;
-    color: var(--main-color);
-}
-
-.contact-item h4 {
-    font-size: 1.6rem;
-    color: rgba(237, 237, 237, 0.6);
-}
-
-.contact-item a, .contact-item p {
-    font-size: 1.8rem;
-    color: var(--text-bg-color);
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.contact-item a:hover {
-    color: var(--main-color);
-}
-
-.skills-content {
+/* Semi-Transparent Glass Card Base */
+.skill-display-card {
+    background: rgba(17, 46, 66, 0.4); /* Matches your second-bg-color with transparency */
+    backdrop-filter: blur(10px);        /* Soft frost window blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 171, 240, 0.2); /* Soft glowing cyan border outline */
+    border-radius: 2rem;
+    padding: 3.5rem 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 2.8rem;
-}
-
-.progress-item {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.skill-info {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    font-size: 1.8rem;
-    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.3s ease, 
+                border-color 0.3s ease;
 }
 
-.skill-info i {
-    color: var(--main-color);
-    font-size: 2.2rem;
-    vertical-align: middle;
-    margin-right: 0.6rem;
+/* Hover Dynamic Glow Interactivity */
+.skill-display-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 171, 240, 0.6); /* Intensified bright border line */
+    box-shadow: 0 15px 35px rgba(0, 171, 240, 0.15); /* Soft cyan external shadow glow */
 }
 
-.skill-info .percentage {
-    color: var(--text-bg-color);
-    font-weight: 500;
+/* Glowing Accent Icon Elements */
+.skill-card-icon i {
+    font-size: 5.5rem;
+    color: var(--main-color); /* Matches your signature portfolio cyan */
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 8px rgba(0, 171, 240, 0.3));
 }
 
-.bar-container {
-    width: 100%;
-    height: 1.4rem;
+.skill-display-card h3 {
+    font-size: 2.4rem;
+    color: var(--text-bg-color); /* Sleek light off-white text */
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.skill-display-card p {
+    font-size: 1.4rem;
+    color: rgba(237, 237, 237, 0.75); /* Highly readable semi-transparent gray-white descriptions */
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    flex-grow: 1;
+}
+
+/* Translucent Pill Interaction Links */
+.skill-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
     background: transparent;
-    border-radius: 1rem;
-    border: 0.2rem solid var(--main-color);
-    overflow: hidden;
-    padding: 0.15rem;
+    color: var(--main-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: 2px solid var(--main-color);
+    border-radius: 3rem;
+    box-shadow: 0 4px 15px rgba(0, 171, 240, 0.1);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-.progress-bar {
-    height: 100%;
+.skill-btn:hover {
     background: var(--main-color);
-    border-radius: 1rem;
-    box-shadow: 0 0 12px var(--main-color);
+    color: var(--bg-color); /* Inverts colors cleanly on selection action */
+    box-shadow: 0 4px 20px rgba(0, 171, 240, 0.4);
+    transform: scale(1.03);
 }
 
+/* ==========================================================================
+   FLEXIBLE RESPONSIVE LAYOUT CONSTRAINTS
+   ========================================================================== */
+@media screen and (max-width: 1200px) {
+    .skills-card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .skills-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    .skills-page-section {
+        padding: 12rem 4% 8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .skills-card-grid {
+        grid-template-columns: 1fr;
+    }
+    .skill-display-card {
+        padding: 3rem 2rem;
+    }
+}
 /* --- SIDE-BY-SIDE GRID SYSTEMS (FOR BOTH PROJECTS & EDUCATION) --- */
 .projects-grid, 
 .education-timeline {
